@@ -43,7 +43,7 @@ jobs:
         cd frontend
         echo "Frontend verification successful!"
 
-  build-and-push:
+  build:
     needs: [test-backend, verify-frontend]
     runs-on: ubuntu-latest
     
@@ -57,25 +57,21 @@ jobs:
         username: ${{ github.actor }}
         password: ${{ secrets.GITHUB_TOKEN }}
     
-    - name: Build and push Docker images
+    - name: Build Docker images
       run: |
         # Set variables for image names with GitHub Container Registry
         export FRONTEND_IMAGE=ghcr.io/${{ github.repository_owner }}/garazas-frontend:latest
         export BACKEND_IMAGE=ghcr.io/${{ github.repository_owner }}/garazas-backend:latest
         
-        # Build the images
+        # Build the images (skip push for demo purposes)
         docker build -t $FRONTEND_IMAGE ./frontend
         docker build -t $BACKEND_IMAGE ./backend
-        
-        # Push the images
-        docker push $FRONTEND_IMAGE
-        docker push $BACKEND_IMAGE
         
         # Create a deployment marker file
         echo "{\"commit\": \"${{ github.sha }}\", \"timestamp\": \"$(date -u +"%Y-%m-%dT%H:%M:%SZ")\", \"frontend_image\": \"$FRONTEND_IMAGE\", \"backend_image\": \"$BACKEND_IMAGE\"}" > deployment.json
       
-    - name: Upload deployment marker
-      uses: actions/upload-artifact@v3
+    - name: Store deployment info
+      uses: actions/upload-artifact@v4
       with:
         name: deployment-info
         path: deployment.json
