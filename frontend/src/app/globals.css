@@ -1,0 +1,506 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* RETRO TELETEXT DESIGN SYSTEM */
+:root {
+  /* Teletext color scheme */
+  --color-primary: #0000ff; /* Blue for text */
+  --color-secondary: #000000;
+  --color-accent: #ffff00; /* Yellow accent */
+  
+  /* Light background palette */
+  --color-gray-100: #f5f5f5;
+  --color-gray-200: #e5e5e5;
+  --color-gray-300: #d4d4d4;
+  --color-gray-400: #a3a3a3;
+  --color-gray-500: #737373;
+  --color-gray-600: #525252;
+  --color-gray-700: #404040;
+  --color-gray-800: #262626;
+  --color-gray-900: #171717;
+  
+  /* Typography scale (teletext-focused) */
+  --font-size-xs: 0.75rem;
+  --font-size-sm: 0.875rem;
+  --font-size-base: 1rem;
+  --font-size-lg: 1.125rem;
+  --font-size-xl: 1.25rem;
+  --font-size-2xl: 1.5rem;
+  --font-size-3xl: 1.875rem;
+  --font-size-4xl: 2.25rem;
+  
+  /* Spacing */
+  --spacing-0: 0;
+  --spacing-1: 0.25rem;
+  --spacing-2: 0.5rem;
+  --spacing-3: 0.75rem;
+  --spacing-4: 1rem;
+  --spacing-6: 1.5rem;
+  --spacing-8: 2rem;
+  --spacing-12: 3rem;
+  --spacing-16: 4rem;
+}
+
+@layer base {
+  body {
+    font-family: var(--font-space-mono), 'VT323', 'Press Start 2P', monospace;
+    color: var(--color-primary);
+    background-color: #f0f0f0; /* Light grey background */
+    line-height: 1.5;
+    letter-spacing: 0.03em;
+    font-variant-numeric: tabular-nums;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-archivo-black), 'VT323', 'Press Start 2P', monospace;
+    font-weight: 700;
+    color: var(--color-primary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  
+  p {
+    margin-bottom: var(--spacing-4);
+    font-family: var(--font-space-mono), 'VT323', 'Courier New', monospace;
+  }
+}
+
+@layer components {
+  .container-narrow {
+    max-width: 65ch;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0 1rem;
+  }
+  
+  /* TELETEXT BUTTONS */
+  .btn {
+    font-family: var(--font-vt323), monospace;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    border: 2px solid var(--color-primary);
+    background-color: transparent;
+    color: var(--color-primary);
+    box-shadow: 3px 3px 0 var(--color-primary);
+    transition: all 0.2s ease;
+    padding: var(--spacing-2) var(--spacing-4);
+  }
+  
+  .btn:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 5px 5px 0 var(--color-primary);
+  }
+  
+  .btn-primary {
+    background-color: var(--color-primary);
+    color: white;
+    border: 2px solid var(--color-primary);
+  }
+  
+  .btn-secondary {
+    background-color: var(--color-primary);
+    color: var(--color-secondary);
+    border-color: var(--color-secondary);
+  }
+  
+  .btn-outline {
+    background-color: transparent;
+    color: var(--color-primary);
+    border-color: var(--color-primary);
+  }
+  
+  /* FORM ELEMENTS */
+  .form-input {
+    border: 2px solid var(--color-primary);
+    background-color: transparent;
+    color: var(--color-primary);
+    padding: 0.75rem;
+    width: 100%;
+  }
+  
+  .form-label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+  }
+  
+  .form-error {
+    color: var(--color-primary);
+    background-color: #f0f0f0;
+    padding: 0.5rem;
+    margin-top: 0.5rem;
+    font-size: 0.875rem;
+    border-left: 4px solid var(--color-primary);
+  }
+}
+
+/* GLOBAL STYLES */
+html {
+  scroll-behavior: smooth;
+  background-color: #f0f0f0;
+  color: var(--color-primary);
+}
+
+/* TELETEXT SECTIONS */
+section {
+  position: relative;
+  padding: 4rem 0;
+  overflow: hidden;
+  scroll-margin-top: 80px; /* Account for fixed header height */
+}
+
+section#home {
+  border-top: none !important;
+  border-bottom: none !important;
+}
+
+/* TEXT STYLING */
+#home h1 {
+  font-size: clamp(2.5rem, 8vw, 5rem);
+  line-height: 1;
+  margin-bottom: 2rem;
+  text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.2);
+}
+
+h2 {
+  font-size: clamp(2rem, 6vw, 3.5rem);
+  margin-bottom: 1.5rem;
+  text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.2);
+}
+
+h3 {
+  font-size: clamp(1.5rem, 4vw, 2.5rem);
+  margin-bottom: 1rem;
+}
+
+/* CARD STYLING */
+.bg-white {
+  background-color: #f0f0f0;
+  border: 2px solid var(--color-primary);
+}
+
+/* UTILITY CLASSES */
+.text-primary-600 {
+  color: var(--color-primary) !important;
+}
+
+.text-gray-200, .text-gray-300, .text-gray-500, .text-gray-600, .text-gray-700 {
+  color: #555555 !important;
+}
+
+.text-gray-900 {
+  color: var(--color-primary) !important;
+}
+
+.bg-primary-600 {
+  background-color: var(--color-primary) !important;
+}
+
+.bg-gray-50 {
+  background-color: #f5f5f5 !important;
+}
+
+.bg-gray-100 {
+  background-color: #f0f0f0 !important;
+}
+
+/* TELETEXT INDEX STYLING */
+.index-item {
+  position: relative;
+  padding-left: 2rem;
+  margin-bottom: 0;
+  transition: transform 0.3s ease;
+  width: 100%;
+  text-decoration: none;
+  color: inherit;
+}
+
+.index-item:hover::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 3px;
+  height: 100%;
+  background-color: var(--color-primary);
+}
+
+.index-number {
+  font-family: var(--font-archivo-black), sans-serif;
+  position: relative;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  opacity: 0.7;
+}
+
+/* Teletext link style */
+.brutalist-link {
+  position: relative;
+  color: var(--color-primary);
+  text-decoration: none;
+  padding: 0 0.25rem;
+  transition: color 0.3s;
+}
+
+.brutalist-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: var(--color-primary);
+  transition: width 0.3s ease;
+}
+
+.brutalist-link:hover::after {
+  width: 100%;
+}
+
+/* Full-width teletext index row */
+.index-row {
+  padding: 0;
+  border-bottom: 1px solid rgba(0, 0, 255, 0.2);
+  transition: background-color 0.3s ease;
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+  position: relative;
+  overflow: hidden;
+}
+
+.index-row:hover {
+  background-color: rgba(0, 0, 255, 0.05);
+  border-bottom-color: var(--color-primary);
+}
+
+/* Inner container for index content to maintain readability */
+.index-row-content {
+  max-width: 2000px;
+  margin: 0 auto;
+  padding: 1.5rem 2rem;
+  position: relative;
+}
+
+/* Refined category styling for full-width display */
+.index-category {
+  display: inline-block;
+  padding: 0.25rem 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border: 1px solid var(--color-primary);
+  color: var(--color-primary);
+  background-color: #f0f0f0;
+  margin-right: 0.5rem;
+}
+
+/* Enhanced detail panel styling for full-width */
+.exhibition-detail-panel {
+  background-color: rgba(240, 240, 240, 0.9);
+  border-top: 1px solid var(--color-primary);
+  border-bottom: 1px solid var(--color-primary);
+  padding: 0;
+  margin-top: 0;
+  width: 100%;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+/* Add subtle vertical bars for teletext effect */
+.exhibition-detail-inner {
+  max-width: 2000px;
+  margin: 0 auto;
+  padding: 2rem;
+  position: relative;
+}
+
+.exhibition-detail-inner:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1px;
+  height: 100%;
+  background-color: var(--color-primary);
+  opacity: 0.2;
+}
+
+.exhibition-detail-inner:after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 1px;
+  height: 100%;
+  background-color: var(--color-primary);
+  opacity: 0.2;
+}
+
+/* Category styling with teletext color scheme */
+.index-category[data-type="Photography"],
+.index-category[data-type="Painting"],
+.index-category[data-type="Video Art"],
+.index-category[data-type="Digital Art"],
+.index-category[data-type="Sculpture"],
+.index-category[data-type="Interdisciplinary"],
+.index-category[data-type="Installation"] {
+  border-color: var(--color-primary);
+}
+
+/* Exhibition details grid */
+.exhibition-details-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+@media (min-width: 768px) {
+  .exhibition-details-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* Teletext specific styles */
+.teletext-box {
+  border: 2px solid var(--color-primary);
+  padding: var(--spacing-4);
+  background-color: rgba(255, 255, 255, 0.9);
+  box-shadow: 4px 4px 0 var(--color-primary);
+}
+
+.teletext-heading {
+  font-family: var(--font-vt323), monospace;
+  color: var(--color-primary);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.2);
+  font-size: var(--font-size-2xl);
+}
+
+.teletext-text {
+  font-family: var(--font-vt323), monospace;
+  color: var(--color-primary);
+  font-size: var(--font-size-base);
+  line-height: 1.4;
+}
+
+.teletext-button {
+  font-family: var(--font-vt323), monospace;
+  color: white;
+  background-color: var(--color-primary);
+  border: none;
+  padding: var(--spacing-2) var(--spacing-4);
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.teletext-button:hover {
+  background-color: #3333ff;
+  transform: translate(-2px, -2px);
+  box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.3);
+}
+
+/* Teletext marquee animation - reliable version */
+@keyframes teletext-scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+.teletext-marquee {
+  display: block;
+  overflow: hidden;
+  background-color: var(--color-primary);
+  color: white;
+  font-family: var(--font-vt323), monospace;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-size: var(--font-size-lg);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  padding: 0.5rem 0;
+  white-space: nowrap;
+  border-bottom: 2px solid white;
+  z-index: 1000; /* Ensure it's above all other content */
+  height: 2.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  width: 100%;
+}
+
+.teletext-marquee-inner {
+  display: inline-block;
+  white-space: nowrap;
+  animation: teletext-scroll 120s linear infinite;
+  width: max-content;
+}
+
+.teletext-marquee-content {
+  display: inline-block;
+  line-height: 1.5rem;
+  font-weight: bold;
+  margin-right: 4rem;
+}
+
+/* Retro Loader Animations */
+@keyframes scanline {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(100%);
+  }
+}
+
+@keyframes flicker {
+  0% {
+    opacity: 0.3;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes glitch {
+  0% {
+    transform: translate(0);
+  }
+  20% {
+    transform: translate(-2px, 2px);
+  }
+  40% {
+    transform: translate(-2px, -2px);
+  }
+  60% {
+    transform: translate(2px, 2px);
+  }
+  80% {
+    transform: translate(2px, -2px);
+  }
+  100% {
+    transform: translate(0);
+  }
+}
+
+.retro-scanline {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 10px;
+  background: rgba(255, 255, 255, 0.1);
+  opacity: 0.75;
+  animation: scanline 8s linear infinite;
+  z-index: 9999;
+  pointer-events: none;
+}
+
+.retro-glitch {
+  animation: glitch 0.3s ease-in-out;
+} 

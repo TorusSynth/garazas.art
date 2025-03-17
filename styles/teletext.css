@@ -1,0 +1,83 @@
+/* Retro Teletext Style CSS */
+
+:root {
+  --teletext-bg: #f0f0f0;
+  --teletext-blue: #0033aa;
+  --teletext-light-blue: #0055cc;
+  --teletext-highlight: #cccccc;
+}
+
+body {
+  background-color: var(--teletext-bg);
+  color: var(--teletext-blue);
+  font-family: "Courier New", Courier, monospace;
+  line-height: 1.5;
+  margin: 0;
+  padding: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: var(--teletext-blue);
+  font-weight: bold;
+  font-family: "Courier New", Courier, monospace;
+}
+
+a {
+  color: var(--teletext-light-blue);
+  text-decoration: none;
+  border-bottom: 2px solid var(--teletext-light-blue);
+}
+
+a:hover {
+  background-color: var(--teletext-highlight);
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Teletext-style boxes */
+.teletext-box {
+  border: 2px solid var(--teletext-blue);
+  padding: 15px;
+  margin-bottom: 20px;
+}
+
+/* Teletext-style header */
+.teletext-header {
+  background-color: var(--teletext-blue);
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  font-size: 1.5em;
+}
+
+/* Retro buttons */
+.teletext-button {
+  background-color: var(--teletext-blue);
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  font-family: "Courier New", Courier, monospace;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.teletext-button:hover {
+  background-color: var(--teletext-light-blue);
+}
+
+/* Teletext-style navigation */
+.teletext-nav {
+  display: flex;
+  justify-content: space-around;
+  background-color: var(--teletext-highlight);
+  padding: 10px 0;
+}
+
+.teletext-nav a {
+  border-bottom: none;
+  font-weight: bold;
+} 

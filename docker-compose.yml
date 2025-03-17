@@ -1,0 +1,93 @@
+version: '3.8'
+
+services:
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.dev
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+      - /app/.next
+    environment:
+      - NODE_ENV=development
+      - NEXT_PUBLIC_API_URL=http://localhost:8000/api
+    depends_on:
+      - backend
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile.dev
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./backend:/app
+      - ./backend/data:/app/data
+    environment:
+      - ENVIRONMENT=development
+      - CORS_ORIGINS=http://localhost:3000
+      - GOOGLE_CREDENTIALS_FILE=/app/credentials/google-service-account.json
+      - REGISTRATION_SHEET_ID=your_google_sheet_id
+      - REGISTRATION_WORKSHEET=Registrations
+    depends_on:
+      - nginx
+
+  nginx:
+    image: nginx:alpine
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx/nginx.dev.conf:/etc/nginx/conf.d/default.conf
+    depends_on: []
+    
+  # Netdata monitoring service
+  netdata:
+    image: netdata/netdata:latest
+    container_name: garazas_netdata
+    hostname: garazas.monitoring
+    restart: unless-stopped
+    cap_add:
+      - SYS_PTRACE
+      - SYS_ADMIN
+    security_opt:
+      - apparmor:unconfined
+    ports:
+      - "19999:19999"
+    volumes:
+      - netdataconfig:/etc/netdata
+      - netdatalib:/var/lib/netdata
+      - netdatacache:/var/cache/netdata
+      - /proc:/host/proc:ro
+      - /sys:/host/sys:ro
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - ./monitoring/netdata.conf:/etc/netdata/netdata.conf:ro
+      - ./monitoring/stream.conf:/etc/netdata/stream.conf:ro
+      - ./monitoring/health_alarm_notify.conf:/etc/netdata/health_alarm_notify.conf:ro
+      - ./monitoring/python.d/http_check.conf:/etc/netdata/python.d/http_check.conf:ro
+    environment:
+      - NETDATA_CLAIM_URL=https://app.netdata.cloud
+      - NETDATA_CLAIM_ROOMS=garazas-art-monitoring
+      - NETDATA_DISABLE_CLOUD=0
+      - NETDATA_WEB_ENABLED=yes
+      - NETDATA_ALLOW_CONNECTIONS_FROM=*
+      - NETDATA_REQUIRE_AUTHENTICATION=no
+    networks:
+      - exhibition-network
+    depends_on:
+      - frontend
+      - backend
+      - nginx
+
+networks:
+  exhibition-network:
+    driver: bridge
+
+volumes:
+  backend_data:
+    driver: local
+  netdataconfig:
+  netdatalib:
+  netdatacache: 

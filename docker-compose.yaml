@@ -1,0 +1,120 @@
+version: '3.8'
+
+services:
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.dev
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+      - /app/.next
+    environment:
+      - NODE_ENV=development
+      - NEXT_PUBLIC_API_URL=http://localhost:8000/api
+    depends_on:
+      - backend
+    networks:
+      - exhibition-network
+    restart: unless-stopped
+    labels:
+      - "netdata.monitoring=true"
+      - "netdata.service.name=frontend"
+      - "netdata.service.category=application"
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile.dev
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./backend:/app
+      - backend_data:/app/data
+      - ./backend/credentials:/app/credentials
+    environment:
+      - ENVIRONMENT=development
+      - CORS_ORIGINS=http://localhost:3000
+      - GOOGLE_CREDENTIALS_FILE=/app/credentials/google-service-account.json
+      - REGISTRATION_SHEET_ID=${REGISTRATION_SHEET_ID:-}
+      - REGISTRATION_WORKSHEET=Registrations
+      - SECRET_KEY=${SECRET_KEY:-super-secret-key-for-development-only}
+    networks:
+      - exhibition-network
+    restart: unless-stopped
+    labels:
+      - "netdata.monitoring=true"
+      - "netdata.service.name=backend"
+      - "netdata.service.category=application"
+
+  nginx:
+    image: nginx:alpine
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx/nginx.dev.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - frontend
+      - backend
+    networks:
+      - exhibition-network
+    restart: unless-stopped
+    labels:
+      - "netdata.monitoring=true"
+      - "netdata.service.name=nginx"
+      - "netdata.service.category=webserver"
+
+  # Netdata monitoring service
+  netdata:
+    image: netdata/netdata:latest
+    container_name: netdata
+    hostname: garazas-monitoring
+    ports:
+      - "19999:19999"
+    restart: unless-stopped
+    cap_add:
+      - SYS_PTRACE
+      - SYS_ADMIN
+    security_opt:
+      - apparmor:unconfined
+    volumes:
+      - netdataconfig:/etc/netdata
+      - netdatalib:/var/lib/netdata
+      - netdatacache:/var/cache/netdata
+      - /etc/passwd:/host/etc/passwd:ro
+      - /etc/group:/host/etc/group:ro
+      - /proc:/host/proc:ro
+      - /sys:/host/sys:ro
+      - /etc/os-release:/host/etc/os-release:ro
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - ./monitoring/netdata.conf:/etc/netdata/netdata.conf:ro
+      - ./monitoring/stream.conf:/etc/netdata/stream.conf:ro
+      - ./monitoring/health_alarm_notify.conf:/etc/netdata/health_alarm_notify.conf:ro
+      - ./monitoring/python.d:/etc/netdata/python.d:ro
+      - ./monitoring/health.d:/etc/netdata/health.d:ro
+    env_file:
+      - ./monitoring/netdata.env
+    environment:
+      - NETDATA_CLAIM_TOKEN=${NETDATA_CLAIM_TOKEN:-}
+      - NETDATA_CLAIM_URL=https://app.netdata.cloud
+      - NETDATA_CLAIM_ROOMS=garazas-art-monitoring
+      - NETDATA_DISABLE_CLOUD=0
+    networks:
+      - exhibition-network
+    depends_on:
+      - frontend
+      - backend
+      - nginx
+
+networks:
+  exhibition-network:
+    driver: bridge
+
+volumes:
+  backend_data:
+    driver: local
+  netdataconfig:
+  netdatalib:
+  netdatacache: 
