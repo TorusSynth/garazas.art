@@ -398,7 +398,7 @@ h3 {
   text-transform: uppercase;
   cursor: pointer;
   transition: all 0.2s ease;
-}
+  }
 
 .teletext-button:hover {
   background-color: #3333ff;
@@ -446,7 +446,7 @@ h3 {
   line-height: 1.5rem;
   font-weight: bold;
   margin-right: 4rem;
-}
+  }
 
 /* Retro Loader Animations */
 @keyframes scanline {

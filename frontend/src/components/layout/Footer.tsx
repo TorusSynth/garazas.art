@@ -21,20 +21,20 @@ const Footer = () => {
             <T keyName="footer.copyright" params={{ year: currentYear }} />
           </p>
           
-          <div className="flex space-x-4">
-            {socialLinks.map((link) => (
-              <a
-                key={link.name}
-                href={link.href}
-                target="_blank"
-                rel="noopener noreferrer"
+            <div className="flex space-x-4">
+              {socialLinks.map((link) => (
+                <a
+                  key={link.name}
+                  href={link.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
                 className="text-[var(--color-primary)] hover:opacity-70 transition-opacity"
-                aria-label={link.name}
-              >
-                <span className="text-xl">{link.icon}</span>
-              </a>
-            ))}
-          </div>
+                  aria-label={link.name}
+                >
+                  <span className="text-xl">{link.icon}</span>
+                </a>
+              ))}
+            </div>
         </div>
       </div>
     </footer>

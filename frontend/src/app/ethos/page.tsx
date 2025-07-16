@@ -69,9 +69,9 @@ export default function EthosPage() {
               </p>
               <p>
                 We aspire to be a catalyst for cultural exchange and artistic innovation, positioning our region as a vibrant hub in the global contemporary art dialogue while preserving and celebrating our local artistic heritage.
-              </p>
-            </div>
-          </div>
+          </p>
+        </div>
+      </div>
           
           {/* Values Section */}
           <div className="max-w-5xl mx-auto">

@@ -55,9 +55,9 @@ export default function OpenCallPage() {
                     </div>
                   </div>
                 ))}
-              </div>
-            </div>
-            
+        </div>
+      </div>
+      
             <div className="teletext-box">
               <h2 className="text-2xl font-bold mb-6 border-b-2 border-[var(--color-primary)] pb-2 text-[var(--color-primary)]">ABOUT OUR OPEN CALL</h2>
               <div className="prose prose-sm mb-6">
@@ -98,10 +98,10 @@ export default function OpenCallPage() {
               Please fill out the form below to submit your work for consideration. All fields marked with an asterisk (*) are required.
             </p>
             <ArtistRegistrationForm />
-          </div>
         </div>
-        
-        {/* FAQ Section */}
+      </div>
+      
+      {/* FAQ Section */}
         <div className="max-w-6xl mx-auto mt-16">
           <h2 className="text-3xl font-bold mb-8 text-center text-[var(--color-primary)] inline-block border-b-4 border-[var(--color-primary)] pb-2">FREQUENTLY ASKED QUESTIONS</h2>
           

@@ -49,18 +49,18 @@ export default function RootLayout({
     <LanguageProvider>
       <LanguageAwareHtml className={`${spaceMono.variable} ${archivoBlack.variable} ${vt323.variable}`}>
         <body className="flex flex-col min-h-screen bg-gray-100">
-          <ErrorBoundary>
-            <AppProvider>
+        <ErrorBoundary>
+          <AppProvider>
               <TranslatedMarquee />
               {/* Add top padding to accommodate the fixed marquee */}
               <div className="pt-[2.5rem]">
-                <Header />
-                <main className="flex-grow relative">{children}</main>
-                <Footer />
+            <Header />
+            <main className="flex-grow relative">{children}</main>
+            <Footer />
               </div>
-            </AppProvider>
-          </ErrorBoundary>
-        </body>
+          </AppProvider>
+        </ErrorBoundary>
+      </body>
       </LanguageAwareHtml>
     </LanguageProvider>
   );

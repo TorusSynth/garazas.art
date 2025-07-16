@@ -261,32 +261,32 @@ const ArchivePage = () => {
                 {isFilterOpen ? 'Hide Filters' : 'Show Filters'}
               </button>
             </div>
-          </div>
-          
-          {/* Filters - Visible on desktop or when toggled on mobile */}
-          <div className={`md:flex gap-4 ${isFilterOpen || 'hidden md:flex'}`}>
-            {/* Year filter */}
-            <div className="mb-4 md:mb-0">
-              <select
-                value={selectedYear || ''}
-                onChange={(e) => setSelectedYear(e.target.value ? parseInt(e.target.value) : null)}
-                className="px-4 py-2 border border-[var(--color-primary)] rounded-none text-[var(--color-primary)] focus:ring-[var(--color-primary)] focus:border-[var(--color-primary)]"
-              >
-                <option value="">All Years</option>
-                {yearOptions.map((year) => (
-                  <option key={year} value={year}>{year}</option>
-                ))}
-              </select>
             </div>
             
-            {/* Category filter */}
+          {/* Filters - Visible on desktop or when toggled on mobile */}
+          <div className={`md:flex gap-4 ${isFilterOpen || 'hidden md:flex'}`}>
+              {/* Year filter */}
             <div className="mb-4 md:mb-0">
-              <select
-                value={selectedCategory || ''}
-                onChange={(e) => setSelectedCategory(e.target.value || null)}
+                <select
+                  value={selectedYear || ''}
+                  onChange={(e) => setSelectedYear(e.target.value ? parseInt(e.target.value) : null)}
                 className="px-4 py-2 border border-[var(--color-primary)] rounded-none text-[var(--color-primary)] focus:ring-[var(--color-primary)] focus:border-[var(--color-primary)]"
-              >
-                <option value="">All Categories</option>
+                >
+                  <option value="">All Years</option>
+                {yearOptions.map((year) => (
+                    <option key={year} value={year}>{year}</option>
+                  ))}
+                </select>
+              </div>
+              
+              {/* Category filter */}
+            <div className="mb-4 md:mb-0">
+                <select
+                  value={selectedCategory || ''}
+                  onChange={(e) => setSelectedCategory(e.target.value || null)}
+                className="px-4 py-2 border border-[var(--color-primary)] rounded-none text-[var(--color-primary)] focus:ring-[var(--color-primary)] focus:border-[var(--color-primary)]"
+                >
+                  <option value="">All Categories</option>
                 <option value="Photography">Photography</option>
                 <option value="Painting">Painting</option>
                 <option value="Video Art">Video Art</option>
@@ -294,17 +294,17 @@ const ArchivePage = () => {
                 <option value="Sculpture">Sculpture</option>
                 <option value="Interdisciplinary">Interdisciplinary</option>
                 <option value="Installation">Installation</option>
-              </select>
-            </div>
-            
-            {/* Reset button */}
-            <button
-              onClick={resetFilters}
+                </select>
+              </div>
+              
+              {/* Reset button */}
+              <button
+                onClick={resetFilters}
               className="px-4 py-2 border border-[var(--color-primary)] text-[var(--color-primary)] hover:bg-[var(--color-primary)] hover:text-white transition-colors"
-            >
-              Reset Filters
-            </button>
-          </div>
+                >
+                  Reset Filters
+                </button>
+              </div>
         </div>
         
         <div className="mb-6">
@@ -324,24 +324,24 @@ const ArchivePage = () => {
         ) : filteredExhibitions.length > 0 ? (
           viewMode === 'grid' ? (
             // Grid View
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {filteredExhibitions.map((exhibition) => (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {filteredExhibitions.map((exhibition) => (
                 <div key={exhibition.id} className="teletext-box hover:border-[var(--color-primary)] transition-colors">
-                  <div className="relative h-56">
-                    <Image
-                      src={exhibition.featured_image_url || '/images/placeholder.jpg'}
-                      alt={exhibition.title}
-                      fill
-                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                      className="object-cover"
-                    />
+                <div className="relative h-56">
+                  <Image
+                    src={exhibition.featured_image_url || '/images/placeholder.jpg'}
+                    alt={exhibition.title}
+                    fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    className="object-cover"
+                  />
                     {/* Overlay */}
                     <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-primary)]/60 to-transparent"></div>
-                  </div>
+                </div>
                   <div className="p-6 bg-gray-100">
                     <h3 className="text-2xl font-bold mb-3 text-[var(--color-primary)] hover:underline">{exhibition.title}</h3>
                     <p className="text-gray-800 mb-4 line-clamp-2">{exhibition.description}</p>
-                    
+                  
                     <div className="flex items-center gap-2 mb-2 text-gray-800">
                       <RiTimeLine className="text-[var(--color-primary)]" />
                       <span>{exhibition.start_date} - {exhibition.end_date}</span>
@@ -390,8 +390,8 @@ const ArchivePage = () => {
                       
                       <div className="md:w-1/6 lg:w-1/8 mb-3 md:mb-0 font-mono text-gray-600 text-sm">
                         {exhibition.start_date.split('-')[0]}
-                      </div>
-                      
+                  </div>
+                  
                       <div className="md:w-1/3 lg:w-1/2 flex justify-between items-center">
                         <p className="text-gray-800 text-sm md:text-base line-clamp-1 mr-4">
                           {exhibition.description.substring(0, 100)}...
@@ -428,10 +428,10 @@ const ArchivePage = () => {
                         </div>
                       </div>
                     </div>
-                  </div>
                 </div>
-              ))}
-            </div>
+              </div>
+            ))}
+          </div>
           )
         ) : (
           <div className="teletext-box text-center py-12">

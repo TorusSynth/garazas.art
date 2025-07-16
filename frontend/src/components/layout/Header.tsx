@@ -13,7 +13,7 @@ const Header = () => {
   const [isLogoHovered, setIsLogoHovered] = useState(false);
   const pathname = usePathname();
   const router = useRouter();
-  
+
   // Define header height for scroll offset calculations
   const HEADER_HEIGHT = 80; // 5rem (h-20) in pixels
 
@@ -54,10 +54,10 @@ const Header = () => {
     if (href.startsWith('#')) {
       // If we're on the home page, scroll to the section
       if (isHomePage) {
-        const targetId = href.substring(1);
-        const element = document.getElementById(targetId);
-        
-        if (element) {
+      const targetId = href.substring(1);
+      const element = document.getElementById(targetId);
+      
+      if (element) {
           // Get the element's position
           const elementPosition = element.getBoundingClientRect().top;
           // Get the current scroll position
@@ -142,22 +142,22 @@ const Header = () => {
           {/* Navigation Items */}
           <nav className="flex items-center">
             {navItems.map((item) => (
-              <a
+            <a
                 key={item.key}
-                href={item.href}
-                onClick={(e) => handleSmoothScroll(e, item.href)}
+              href={item.href}
+              onClick={(e) => handleSmoothScroll(e, item.href)}
                 className={`font-bold text-sm uppercase px-4 py-2 transition-all ${
                   scrolled ? 'text-[var(--color-primary)] hover:text-[#3333ff]' : 'text-white hover:text-gray-200'
-                }`}
-                style={{
+              }`}
+              style={{
                   transition: 'transform 0.2s ease, color 0.3s ease',
                   transform: 'translateY(0)',
-                }}
-              >
+              }}
+            >
                 <T keyName={item.key as any} />
-              </a>
-            ))}
-          </nav>
+            </a>
+          ))}
+        </nav>
           
           {/* Language Switcher */}
           <div className="ml-4">
