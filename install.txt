@@ -1,0 +1,70 @@
+# How to Continue Working on Garazas.art from Another Device
+
+## Prerequisites
+- Cursor IDE installed on the new device
+- Git installed on the new device
+- Node.js 18+ installed on the new device
+
+## Step-by-Step Instructions
+
+### 1. Clone the Repository
+git clone https://github.com/TorusSynth/garazas.art.git
+cd garazas.art
+
+### 2. Open in Cursor
+cursor .
+
+Or open Cursor and use File > Open Folder to select the garazas.art folder.
+
+### 3. Install Dependencies
+cd frontend
+npm install
+
+### 4. Start Development Server
+npm run dev
+
+### 5. Access the Website
+Open your browser and go to: http://localhost:3000
+
+## Project Structure Overview
+
+garazas.art/
+├── frontend/                 # Next.js application
+│   ├── src/
+│   │   ├── app/             # Pages (home, archive, open-call, ethos)
+│   │   ├── components/      # React components
+│   │   └── lib/            # Utilities, types, translations
+│   │       ├── api/        # API services
+│   │       ├── context/    # React contexts
+│   │       ├── translations/ # EN/LT translation files
+│   │       └── types/      # TypeScript type definitions
+├── backend/                 # FastAPI backend (not needed for frontend dev)
+└── docs/                   # Project documentation
+
+## Key Features Available
+
+✅ Bilingual Support: English/Lithuanian with language switcher
+✅ Exhibition Management: Showcase current and past exhibitions
+✅ Event System: Display upcoming events and workshops
+✅ Artist Registration: Open call submission form
+✅ Retro Design: Teletext aesthetic with blue/grey color scheme
+✅ Responsive Layout: Works on desktop and mobile
+
+## Development Workflow
+
+1. Make changes to components in frontend/src/components/
+2. Update translations in frontend/src/lib/translations/ (en.ts, lt.ts)
+3. Add new pages in frontend/src/app/
+4. Test changes at http://localhost:3000
+5. Commit and push when ready:
+   git add .
+   git commit -m "your commit message"
+   git push origin main
+
+## Troubleshooting
+
+- Port 3000 in use: Try npm run dev -- -p 3001
+- Missing dependencies: Run npm install again
+- Build errors: Check the terminal output for specific error messages
+
+The website should load immediately with all features working! 🎨 
